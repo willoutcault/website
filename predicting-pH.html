@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport content="width="device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="contact-info">
+          <div class="contact-card">
+            <i class="card-icon far fa-envelope"></i>
+            <p>woutcault@gmail.com</p>
+          </div>
+          <div class="contact-card">
+            <i class="card-icon fas fa-phone"></i>
+            <p>631-740-4446</p>
+          </div>
+          <div class="contact-card">
+            <i class="card-icon fas fa-map-marker-alt"></i>
+            <p>Saint James, New York</p>
+          </div>
+        </div>
+      </nav>
+      <section>
+          <div class="content">
+            <h1 class="headline">Predicting pH</h1>
+            <a href="index.html" class="square_btn fas fa-home"></a>
+            <h3 class="mini-headline">Introduction</h3>
+            <p class="project-description">A soda company is considering hiring a team of data scientests in order to improve the stability and composition of their beverages. Their is a special interest to model and predict pH for quality control and beverage development. A data science team including Layla Quinones, Sergio Ortega, Jack Russo, Neil Shah and myself were given the task to analyse the data and recommend future improvements.</p>
+            <h3 class="mini-headline">Exploratory Data Analysis</h3>
+            <p class="project-description">To begin initial insights were gained by acquiring an initial view of the predictors and their corresponding data types.</p>
+            <img src="predicting-ph-pictures\summaries.PNG" alt="">
+            <p class="project-description">The data revealed 33 columns consisting of 32 predictor variables (31 numerical, one categorical, and the target variable pH. Histograms were created for each variable and can be seen in the github repository at the bottom of this report. The histograms show a variable with little variability as seen below.</p>
+            <img src="predicting-ph-pictures\nonzero-variance2.PNG" alt="">
+            <p class="project-description">This variable was removed from the data set because many observations had the same value therefore, it does not provide meaningful information about our target variable.</p>
+            <p class="project-description">Each column was analyzed for missing values by plotting a histogram and aggregated plot as seen below.</p>
+            <img src="predicting-ph-pictures\missing-values.PNG" alt="">
+            <p class="project-description">The data had more than 5% of the overall data missing with MFG missing the most values (approximately 8.25%), followed by the categorical variable, Brand Code.</p>
+            <p class="project-description">Following the missing data analysis, correlation between predictors is analyzed in order to determine potential multicollinearity or redundancy within the data. The figure below identifies predictor variables that had high correlations.</p>
+            <img src="predicting-ph-pictures\correlation.PNG" alt="">
+            <p class="project-description">Each highly correlated predictor variable was analyzed in respect to the target variable, pH. Due to correlation Filler Speed, Hyd Pressure2, Hyd Pressure3, and Mnf Flow were removed prior to training our model.</p>
+            <h3 class="mini-headline">Preprocessing</h3>
+            <p class="project-description">Prior to imputing data we reduced the complexity of our model through dimensionality reduction for reasons seen below.</p>
+            <img src="predicting-ph-pictures\dimensionality-reduction.PNG" alt="">
+            <p class="project-description">After dimensionality reduction the total number of missing values within our data set was 1.2%, a relatively low number for non-categorical predictors. We concluded that random value imputation would minimize cost.</p>
+            <p class="project-description">Following imputation we aimed to reduce dimensionality even more through principal component analysis. PCA was applied to all the futures except for our categorical variable. What we found was the the first two principal components (there were 23 total) accounted for about 28% of the variance within the data. The plot below shows PC1 on the x-axis and PC2 on the y-axis.</p>
+            <img src="predicting-ph-pictures\PCA.PNG" alt="">
+            <p class="project-description">The magnitude and direction of the vector correlates with the contribution towards each principal component. Carb Volume, Carb Pressure, Density, Carb Rel, and Carb Temp all have significant contributions towards PC1. Whereas Carb Pressure, Pressure Vacuum, Carb Flow and Oxygen Filler contribute to most of PC2. The color of each datapoint represents the Brand Code. We see brands D and A have distinguishable characteristics while brands C and B have overlapping components.</p>
+            <h3 class="mini-headline">Modeling</h3>
+            <p class="project-description">The datasets were fit to three separate models: multiple linear regression (MLR), random forest and gradient boosting machine. The data was split into an 80/20 training/testing sets. The multiple linear regression was used as a baseline due to simplicity.</p>
+            <img src="predicting-ph-pictures\MLR.PNG" alt="">
+            <p class="project-description">The datasets were fit to three separate models: multiple linear regression (MLR), random forest and gradient boosting machine. The data was split into an 80/20 training/testing sets. The multiple linear regression was used as a baseline due to simplicity, specifically we used a backwards stepwise regression to maximize the adjusted goodness-of-fit.</p>
+            <p class="project-description">Next the random forest model was created using 100, 500 and 700 iterations. Increasing the number of iterations is most likely going to have the best performance however it may take too much time depending on the context or require too much processing.</p>
+            <img src="predicting-ph-pictures\random-forest.PNG" alt="">
+            <p class="project-description">As expected the model using 700 iterations had the lowest RMSE and not extremely long processing time.</p>
+            <p class="project-description">The gradient boosted tree model was implemented through the XgBoost library. This model is expected to perform well in respect to random-forest and MLR however it is also expected to have long processing time.</p>
+            <img src="predicting-ph-pictures\xgboost.PNG" alt="">
+            <p class="project-description">The XgBoost is particularly good at addressing any underfitting or overfitting that may occur when using random-forest or MLR.</p>
+            <h3 class="mini-headline">Results</h3>
+            <p class="project-description">The error metrics RMSE and MAPE were used to determine which model performed best on the test set.</p>
+            <img src="predicting-ph-pictures\rmse.PNG" alt="">
+            <p class="project-description">Both random-forest and XgBoost performed relatively well compared with MLR. Ultimately the deciding factor would be computation time. In an ideal scenario both models would be ran and compared side by side as we continued to get results back. The relationship between the observed pH and predicted pH is below.</p>
+            <img src="predicting-ph-pictures\results.PNG" alt="">
+            <p class="project-description">Our model follows the same trends as the actual data follows and visually confirms that random-forest is an appropriate predictor of pH.</p>
+            <h3 class="mini-headline">Conclusions</h3>
+            <p class="project-description">While the original data contained 32 predictor variables, only 26 were retained in training models due to multicollinearity, redundancy of information and low-explanation of variability. In an ideal world training multiple models is practical however, from a business and engineering perspective, dimension reduction and model identification is a critical step in the predictive process as choices made can reduce cost associated with acquiring data and training models.</p>
+            <p class="project-description">Further conclusions include optimizing manufacturing processes by eliminating elementes that don't contribute to the brand creation. In addition, quality control could be improved; some of these variables presented some readings that could have been from mistakes. Also there maybe possible consilidation opportunities between brands B and C considering how well they coincide with one another.</p><br>
+            <i>Special thanks to Layla Quinones, Sergio Ortega, Jack Russo and Neil Shah for teaming up to create an excellently executed final project.</i><br><br>
+            <a id="github" href="https://github.com/willoutcault/DATA624/blob/master/DATA624%20Project%202.pdf">Github Repository</a>
+          </div>
+      </section>
+    </header>
+    <div class="slider">
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js" integrity="sha512-0xrMWUXzEAc+VY7k48pWd5YT6ig03p4KARKxs4Bqxb9atrcn2fV41fWs+YXTKb8lD2sbPAmZMjKENiyzM/Gagw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" integrity="sha512-DkPsH9LzNzZaZjCszwKrooKwgjArJDiEjA5tTgr3YX4E6TYv93ICS8T41yFHJnnSmGpnf0Mvb5NhScYbwvhn2w==" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+
+  </body>
+</html>
+
+<style media="screen">
+  section{
+    height:100%;
+  }
+
+  nav input{
+    position:absolute;
+    left: 10vh;
+    top: 5vh;
+    padding: 1em;
+  }
+
+  .content img{
+    padding-top: 5vh;
+  }
+
+  .content #github{
+    padding-top: 5vh;
+    color: white;
+  }
+
+  .content i{
+    line-height: 2em;
+    color: white;
+  }
+
+  .content{
+    padding: 0% 10% 10% 10%;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media(max-width: 1100px){
+    .content{
+      padding: 1vh 1vh 1vh 1vh;
+      width: 100%;
+    }
+    .headline{
+      font-size: 48px;
+
+    }
+    .content img{
+      height: 100%;
+      width: 100%;
+    }
+
+    .square_btn{
+      bottom: 5vh;
+      position: fixed;
+      border-radius: 50%;
+      left: 5vh;
+      z-index: 1000;
+      padding: 1em 1em;
+    }
+    .fa-home:before{
+      font-size: 30px;
+    }
+
+  }
+
+  .headline{
+    align-self: center;
+    position: relative;
+    object-fit: cover;
+    left: -8vh;
+    top: 0;
+  }
+
+  .mini-headline{
+    align-self: center;
+    position: relative;
+    left: 0;
+    top: 0;
+    color: white;
+    font-size: 36px;
+    padding-top: 3vh;
+    line-height: 2em;
+  }
+
+  .project-description{
+    font-size: 20px;
+    color: white;
+    padding-top: 3vh;
+    line-height: 2em;
+  }
+@media(min-width: 1101px){
+  .square_btn{
+    top: -1vh;
+    position: fixed;
+    border-radius: 50%;
+    left: 5vh;
+    z-index: 1000;
+    padding: 1em 1em;
+  }
+  .fa-home:before{
+    font-size: 30px;
+  }
+}
+
+
+</style>

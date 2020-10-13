@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport content="width="device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="contact-info">
+          <div class="contact-card">
+            <i class="card-icon far fa-envelope"></i>
+            <p>woutcault@gmail.com</p>
+          </div>
+          <div class="contact-card">
+            <i class="card-icon fas fa-phone"></i>
+            <p>631-740-4446</p>
+          </div>
+          <div class="contact-card">
+            <i class="card-icon fas fa-map-marker-alt"></i>
+            <p>Saint James, New York</p>
+          </div>
+        </div>
+      </nav>
+      <section>
+          <div class="content">
+            <a href="index.html" class="square_btn fas fa-home"></a>
+            <h1 class="headline">Movie Recommender System</h1>
+            <h3 class="mini-headline">Introduction</h3>
+            <p class="project-description">Data shows high turnover rates between users and their choice of streaming platforms; meaning one bad recommendation and we may lose them as a customer. Our goal is to minimize these turnover rates by instilling trust through consistent and precise recommendations. Our approach will be to maximize precision by optimizing the choice of algorithms, evaluation schema methods, and parameters. This will be done using exploratory analysis and by evaluating a series of different models.
+            </p>
+            <h3 class="mini-headline">Exploratory Data Analysis</h3>
+            <p class="project-description">The data we are working with includes 943 users and 1,664 movies. The data contains a lot of users and movies with a low rating count, meaning they will not provide much feedback for our model and are considered noise. By removing movies with less than 50 ratings and users that haven't rated over 95 movies our dimensions reduce from 943x1664 to 369x691.</p>
+            <h3 class="mini-headline">Train/Test</h3>
+            <p class="project-description">Three methods were used for splitting the data. These are methods from the recommenderlab library in R. The methods were a normal split, cross-validation and bootstrap. The split takes a fixed 80% and 20% for the train and test sets respectively. Cross-validationuses k-fold validation sets, in our case we set k equal to four and the train/test sets were 75% and 25% respectively. Lastly the bootstrapping method samples the rows with replacement which allows us to sample on user more than once. For the bootstrap method the train and test set sizes were 80% and 44% respectively.</p>
+            <h3 class="mini-headline">Modeling</h3>
+            <p class="project-description">Next we will use different algorithms with different parameters to optimize model performance. The algorithms will include:<br>-IBCF using Cosine <br> -IBCF using Pearson <br>-UBCF using Cosine <br>-UBCF using Pearson <br>-SVD <br>-Random (Our baseline)<br>
+            All model performances will be compared with our random algorithm which is the baseline for model performance. The performance for each model will be compared with one another, and overall performance will be compared between the different evaluation scheme methods described earlier.</p>
+            <h3 class="mini-headline">Results</h3>
+            <p class="project-description">The three different train/test methods results in the same thing. Our SVD algorithm showed the greatest AUC for each method. Below you can see one of the examples which is from the boostrap method. It's important to note that UBCF Pearson performed almost just as well as SVD.</p>
+            <img src="amazonmusic\results.PNG" alt="">
+            <h3 class="mini-headline">Conclusion</h3>
+            <p class="project-description">To reiterate, our goal is to maximize precision in order to reduce customer turnover rates. We performed exploratory analysis, split the data using three different evaluation schema methods, created six different models for each schema, and plotted our results. In conclusion, by using User-Based Collaborative Filtering with the pearson method we can maximize precision and minimize customer turnover rates.
+            </p>
+            <i>Special thanks to Paul Perez for teaming up with me to create this project.</i><br><br>
+            <a id="github" href="https://github.com/willoutcault/RecommenderSystem/blob/master/DATA%20612%20Project%204.pdf">Github Repository</a>
+          </div>
+      </section>
+    </header>
+    <div class="slider">
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js" integrity="sha512-0xrMWUXzEAc+VY7k48pWd5YT6ig03p4KARKxs4Bqxb9atrcn2fV41fWs+YXTKb8lD2sbPAmZMjKENiyzM/Gagw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" integrity="sha512-DkPsH9LzNzZaZjCszwKrooKwgjArJDiEjA5tTgr3YX4E6TYv93ICS8T41yFHJnnSmGpnf0Mvb5NhScYbwvhn2w==" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+
+  </body>
+</html>
+
+<style media="screen">
+  section{
+    height:100%;
+  }
+
+  nav input{
+    position:absolute;
+    left: 10vh;
+    top: 5vh;
+    padding: 1em;
+  }
+
+  .content img{
+    padding-top: 5vh;
+  }
+
+  .content #github{
+    padding-top: 5vh;
+    color: white;
+  }
+
+  .content i{
+    line-height: 2em;
+    color: white;
+  }
+
+  .content{
+    padding: 0% 10% 10% 10%;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media(max-width: 1100px){
+    .content{
+      padding: 1vh 1vh 1vh 1vh;
+      width: 100%;
+    }
+    .headline{
+      font-size: 48px;
+
+    }
+    .content img{
+      height: 100%;
+      width: 100%;
+    }
+
+    .square_btn{
+      bottom: 5vh;
+      position: fixed;
+      border-radius: 50%;
+      left: 5vh;
+      z-index: 1000;
+      padding: 1em 1em;
+    }
+    .fa-home:before{
+      font-size: 30px;
+    }
+
+  }
+
+  .headline{
+    align-self: center;
+    position: relative;
+    object-fit: cover;
+    left: -8vh;
+    top: 0;
+  }
+
+  .mini-headline{
+    align-self: center;
+    position: relative;
+    left: 0;
+    top: 0;
+    color: white;
+    font-size: 36px;
+    padding-top: 3vh;
+    line-height: 2em;
+  }
+
+  .project-description{
+    font-size: 20px;
+    color: white;
+    padding-top: 3vh;
+    line-height: 2em;
+  }
+@media(min-width: 1101px){
+  .square_btn{
+    top: -1vh;
+    position: fixed;
+    border-radius: 50%;
+    left: 5vh;
+    z-index: 1000;
+    padding: 1em 1em;
+  }
+  .fa-home:before{
+    font-size: 30px;
+  }
+}
+
+
+</style>

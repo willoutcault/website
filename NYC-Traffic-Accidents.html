@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport content="width="device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="contact-info">
+          <div class="contact-card">
+            <i class="card-icon far fa-envelope"></i>
+            <p>woutcault@gmail.com</p>
+          </div>
+          <div class="contact-card">
+            <i class="card-icon fas fa-phone"></i>
+            <p>631-740-4446</p>
+          </div>
+          <div class="contact-card">
+            <i class="card-icon fas fa-map-marker-alt"></i>
+            <p>Saint James, New York</p>
+          </div>
+        </div>
+      </nav>
+      <section>
+          <div class="content">
+            <a href="index.html" class="square_btn fas fa-home"></a>
+            <h1 class="headline">COVID-19's Impact on NYC Traffic Accidents</h1>
+            <h3 class="mini-headline">Introduction</h3>
+            <p class="project-description">I want to visualize the impact COVID-19 had on monthly NYC traffic accidents. This involved forecasting future months based off previous data not influenced by the pandemic. To complete the time-series forecasting necessary for the analysis I created an ARIMA model. The raw data includes the total number of accidents from 2013 to present-day aggregated by month.</p>
+            <h3 class="mini-headline">Data Aggregation</h3>
+            <p class="project-description">
+            The data was retrieved the NYC Open Data and was in the form of individual accidents. The total number of accidents was much to large (>10m) to import onto my machine, therefore I used the Socrata API to import the sum of accidents by month. The dates I retrieved ranged from January 2013 to June of 2020.
+            </p>
+            <img src="nyc-traffic\data_aggregation.PNG" alt="">
+            <h3 class="mini-headline">Train/Test</h3>
+            <p class="project-description">Below is a plot of the NYC Traffic Accidents by month from January 2013 to June 2020</p>
+            <img src="nyc-traffic\raw_data.PNG" alt="">
+            <p class="project-description">Train: January 2013 - December of 2018. <br> Test: January 2019 - December 2019.</p>
+            <img src="nyc-traffic\traintest.PNG" alt="">
+            <h3 class="mini-headline">Stationality</h3>
+            <p class="project-description">In order to get the data to be stationary the log value was taken and the data was differenced. A plot of the data shows that the rolling mean and rolling standard deviation have low variability. In addition a Dickey-Fuller test was conducted.</p>
+            <img src="nyc-traffic\dickey-fuller.PNG" alt="">
+            <p class="project-description">The p-value is less than 0.05 therefor we reject the null-hypothesis and conclude that there is statistical evidence for stationary data. As seen in the graph the rolling mean stays around zero and rolling standard deviation floats around the same value. Now we know for stationality we need to difference the data once, this means our 'd' parameter in our ARIMA model will equal to one.</p>
+            <h3 class="mini-headline">Optimizing P, D and Q</h3>
+            <p class="project-description">p: the number of lag observations in the model; also known as the lag order.<br> d: the number of times that the raw observations are differenced; also known as the degree of differencing. <br> q: the size of the moving average window; also known as the order of the moving average. <br>Our ARIMA model requires three parameters and we know our d value is one. Next we use an optimzation algorithm that picks the p and q parameters that have the lowest AIC values.</p>
+            <h3 class="mini-headline">Modeling</h3>
+            <p class="project-description">The model now has optimized parameters and was trained using stationary data. We are ready to forecast the next 18 months. The first 12 will be used to analyze how well our model performed, the proceeding six months will be used to analyze effects of COVID-19. Below we see the plot of the 18 month projection.</p>
+            <img src="nyc-traffic\projections.PNG" alt="">
+            <h3 class="mini-headline">Results</h3>
+            <p class="project-description">Now we look at a plot of both test data and forecast data ranging from January 2019 through December 2019, in addition to a table of the percent difference between forecasted data and actual data.</p>
+            <img src="nyc-traffic\evalplot.PNG" alt=""><br>
+            <img src="nyc-traffic\evaltable.PNG" alt="">
+            <p class="project-description">Throughout the year the test set stays within 13% of the projections. Below we see a drastic change in percent difference starting in March. In March accidents were down 41%, by June accidents were reduced by almost 70%.</p>
+            <img src="nyc-traffic\2020.PNG" alt=""><br><br>
+            <a id="github" href="https://github.com/willoutcault/NYC_Accidents_ARIMA_Forcast/tree/master">Github Repository</a>
+          </div>
+      </section>
+    </header>
+    <div class="slider">
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js" integrity="sha512-0xrMWUXzEAc+VY7k48pWd5YT6ig03p4KARKxs4Bqxb9atrcn2fV41fWs+YXTKb8lD2sbPAmZMjKENiyzM/Gagw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" integrity="sha512-DkPsH9LzNzZaZjCszwKrooKwgjArJDiEjA5tTgr3YX4E6TYv93ICS8T41yFHJnnSmGpnf0Mvb5NhScYbwvhn2w==" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+
+  </body>
+</html>
+
+<style media="screen">
+  section{
+    height:100%;
+  }
+
+  nav input{
+    position:absolute;
+    left: 10vh;
+    top: 5vh;
+    padding: 1em;
+  }
+
+  .content img{
+    padding-top: 5vh;
+  }
+
+  .content #github{
+    padding-top: 5vh;
+    color: white;
+  }
+
+  .content i{
+    line-height: 2em;
+    color: white;
+  }
+
+  .content{
+    padding: 0% 10% 10% 10%;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media(max-width: 1100px){
+    .content{
+      padding: 1vh 1vh 1vh 1vh;
+      width: 100%;
+    }
+    .headline{
+      font-size: 48px;
+
+    }
+    .content img{
+      height: 100%;
+      width: 100%;
+    }
+
+    .square_btn{
+      bottom: 5vh;
+      position: fixed;
+      border-radius: 50%;
+      left: 5vh;
+      z-index: 1000;
+      padding: 1em 1em;
+    }
+    .fa-home:before{
+      font-size: 30px;
+    }
+
+  }
+
+  .headline{
+    align-self: center;
+    position: relative;
+    object-fit: cover;
+    left: -8vh;
+    top: 0;
+  }
+
+  .mini-headline{
+    align-self: center;
+    position: relative;
+    left: 0;
+    top: 0;
+    color: white;
+    font-size: 36px;
+    padding-top: 3vh;
+    line-height: 2em;
+  }
+
+  .project-description{
+    font-size: 20px;
+    color: white;
+    padding-top: 3vh;
+    line-height: 2em;
+  }
+@media(min-width: 1101px){
+  .square_btn{
+    top: -1vh;
+    position: fixed;
+    border-radius: 50%;
+    left: 5vh;
+    z-index: 1000;
+    padding: 1em 1em;
+  }
+  .fa-home:before{
+    font-size: 30px;
+  }
+}
+
+
+</style>

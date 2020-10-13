@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport content="width="device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="contact-info">
+          <div class="contact-card">
+            <i class="card-icon far fa-envelope"></i>
+            <p>woutcault@gmail.com</p>
+          </div>
+          <div class="contact-card">
+            <i class="card-icon fas fa-phone"></i>
+            <p>631-740-4446</p>
+          </div>
+          <div class="contact-card">
+            <i class="card-icon fas fa-map-marker-alt"></i>
+            <p>Saint James, New York</p>
+          </div>
+        </div>
+      </nav>
+      <section>
+          <div class="content">
+            <a href="index.html" class="square_btn fas fa-home"></a>
+            <h1 class="headline">Amazon Music Recommendations</h1>
+            <h3 class="mini-headline">Introduction</h3>
+            <p class="project-description">
+              The goal of this project is to produce reliable recommendations at an efficient rate using a relatively large dataset (>1M ratings). Specifically we want to recommend music based off Amazon music reviews using Python, PySpark, and Alternating Least Squares (ALS) method.</p>
+            <p class="project-description">The dataset was obtained from one of Amazon's Customer Review datasets (https://s3.amazonaws.com/amazon-reviews-pds/). Amazon provides a small sample of customer evaluations in order to help further research in a variety of disciplines, in our case we built an ALS model using Pyspark to recommend music for a large sum of individuals. The data contains reviews spanning from 1995 to 2015 in the form of ratings (1-5 stars).</p>
+            <h3 class="mini-headline">Exploratory Data Analysis</h3>
+            <p class="project-description">Amazon's customer digital music review dataset is loaded as a tsv (tab-separated values) file using pandas and it has 1,681,484 rows and 15 columns. Out of the 15 columns we will be focused on the customer ID, product ID, product title and star rating.</p> <img src="amazonmusic\head.PNG" alt="">
+            <p class="project-description">There are close to 700k unique songs and 800k unique users which need to be filtered according to activity.</p>
+            <h3 class="mini-headline">Building The Model</h3>
+            <p class="project-description">A little over 10k of the most active users and the 10k most rated songs were used in order to train the model. This mean we were dealing with a user-item matrix with over 1,000,000 ratings, next we store our dataframe in pyspark.</p>
+            <img src="amazonmusic\sparkdf1.PNG" alt="">
+            <p class="project-description">For ALS to work with Pyspark we must create numeric values for the customer and product ID's. We do this by taking their respective index values and applying those to be their new ID.</p>
+            <img src="amazonmusic\sparkdf2.PNG" alt="">
+            <p class="project-description">We randomly split our dataframe into 80/20 train/test sets. We create the ALS model by passing through the following parameters that we know; new customer and product ID, star rating, coldStartStrategy=drop and nonnegative=True. This way we do not predict negative values. Next we experimented with parameters which includes the rank, max iterations, and regularization parameter in order to minimize RMSE. The algorithm with the best results can be seen below.</p>
+            <img src="amazonmusic\algorithm.PNG" alt="">
+            <h3 class="mini-headline">Results</h3>
+            <p class="project-description">Our model had an RMSE of 0.972 and we can view the rating predictions below.</p>
+            <img src="amazonmusic\predictions.PNG" alt="">
+            <p class="project-description">The total time it took to create five song recommendations for 10k songs using the PySpark ALS Model was just over two minutes. Lastly the song names and index IDs were matched so that song names were returned from each recommendation rather than the index ID. Below you can see the five recomendations made for the song 'Endless Love'.
+            </p>
+            <img src="amazonmusic\songrecs" alt="">
+            <i>Special thanks to Paul Perez for teaming up with me to create this project.</i><br><br>
+            <a id="github" href="https://github.com/willoutcault/RecommenderSystem/blob/master/Rec%20Systems%20Final.ipynb">Github Repository</a>
+          </div>
+      </section>
+    </header>
+    <div class="slider">
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js" integrity="sha512-0xrMWUXzEAc+VY7k48pWd5YT6ig03p4KARKxs4Bqxb9atrcn2fV41fWs+YXTKb8lD2sbPAmZMjKENiyzM/Gagw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" integrity="sha512-DkPsH9LzNzZaZjCszwKrooKwgjArJDiEjA5tTgr3YX4E6TYv93ICS8T41yFHJnnSmGpnf0Mvb5NhScYbwvhn2w==" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+
+  </body>
+</html>
+
+<style media="screen">
+
+  section{
+    height:100%;
+  }
+
+  nav input{
+    position:absolute;
+    left: 10vh;
+    top: 5vh;
+    padding: 1em;
+  }
+
+  .content img{
+    padding-top: 5vh;
+  }
+
+  .content #github{
+    padding-top: 5vh;
+    color: white;
+  }
+
+  .content i{
+    line-height: 2em;
+    color: white;
+  }
+
+  .content{
+    padding: 0% 10% 10% 10%;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media(max-width: 1100px){
+    .content{
+      padding: 1vh 1vh 1vh 1vh;
+      width: 100%;
+    }
+    .headline{
+      font-size: 48px;
+
+    }
+    .content img{
+      height: 100%;
+      width: 100%;
+    }
+
+    .fa-home{
+      bottom: 5vh;
+      position: fixed;
+      border-radius: 50%;
+      left: 5vh;
+      z-index: 1000;
+      padding: 1em 1em;
+    }
+    .fa-home:before{
+      font-size: 30px;
+    }
+
+  }
+
+  .headline{
+    align-self: center;
+    position: relative;
+    object-fit: cover;
+    left: -8vh;
+    top: 0;
+  }
+
+  .mini-headline{
+    align-self: center;
+    position: relative;
+    left: 0;
+    top: 0;
+    color: white;
+    font-size: 36px;
+    padding-top: 3vh;
+    line-height: 2em;
+  }
+
+  .project-description{
+    font-size: 20px;
+    color: white;
+    padding-top: 3vh;
+    line-height: 2em;
+  }
+@media(min-width: 1101px){
+  .fa-home{
+    top: -1vh;
+    position: fixed;
+    border-radius: 50%;
+    left: 5vh;
+    z-index: 1000;
+    padding: 1em 1em;
+  }
+  .fa-home:before{
+    font-size: 30px;
+  }
+}
+
+
+</style>

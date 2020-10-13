@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport content="width="device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+  </head>
+  <body>
+
+
+    <header>
+      <nav>
+        <div class="contact-info">
+          <div class="contact-card">
+            <i class="card-icon far fa-envelope"></i>
+            <p>woutcault@gmail.com</p>
+          </div>
+          <div class="contact-card">
+            <i class="card-icon fas fa-phone"></i>
+            <p>631-740-4446</p>
+          </div>
+          <div class="contact-card">
+            <i class="card-icon fas fa-map-marker-alt"></i>
+            <p>Saint James, New York</p>
+          </div>
+        </div>
+      </nav>
+      <section>
+        <div class="hero">
+          <img id="norman" src="landing-page-pictures\norman-fire.JPG" alt="">
+          <h1 class="headline">William Outcault</h1>
+          <p class="headlineinfo">
+            Aspiring Data Scientist
+          </p>
+        <a href="about-me.html" class="square_btn about_me">About Me</a> <br>
+        </div>
+      </section>
+    </header>
+
+    <div class="slider">
+    </div>
+    <div class="content">
+      <div class="wrapper">
+        <div class="cols">
+          <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="container">
+                  <div class="front" style="background-image: url(landing-page-pictures/predictingpH.PNG)">
+                      <div class="inner">
+                          <p>Predicting pH</p>
+                      </div>
+                  </div>
+                  <div class="back">
+                      <div class="inner">
+                        <p>Used live production data consisting of 33 variables to develop a predictive model for pH.</p>
+                        <a href="predicting-pH.html" class="square_btn">Read More</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="container">
+                  <div class="front" style="background-image: url(landing-page-pictures/timeseries.PNG)">
+                      <div class="inner">
+                          <p>Forecasting Time-Series Data</p>
+                      </div>
+                  </div>
+                  <div class="back">
+                      <div class="inner">
+                          <p>Models were created to forecast the proceeding 140 data points for twelve different time-series.</p>
+                          <a href="forecasting-time-series.html" class="square_btn">Read More</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="container">
+                  <div class="front" style="background-image: url(landing-page-pictures/skillfinder.PNG)">
+                      <div class="inner">
+                          <p>Skill Finder Web App</p>
+                      </div>
+                  </div>
+                  <div class="back">
+                      <div class="inner">
+                        <p>Scrapes real-time data relavent to the queried job title and location.</p>
+                        <a href="skillfinder.html" class="square_btn">Read More</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="container">
+                  <div class="front" style="background-image: url(landing-page-pictures/trafficforecast.PNG)">
+                      <div class="inner">
+                          <p>Traffic Accidents Since COVID-19</p>
+                      </div>
+                  </div>
+                  <div class="back">
+                      <div class="inner">
+                          <p>Visualize the impact COVID-19 had on the total number of NYC traffic accidents.</p>
+                          <a href="NYC-Traffic-Accidents.html" class="square_btn">Read More</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="container">
+                  <div class="front" style="background-image: url(landing-page-pictures/songrec.PNG)">
+                      <div class="inner">
+                          <p>Amazon Music Recommendations</p>
+                      </div>
+                  </div>
+                  <div class="back">
+                      <div class="inner">
+                          <p>Recommend music based off Amazon music reviews using Python, PySpark, and Alternating Least Squares (ALS) method.</p>
+                          <a href="Music-Recommender.html" class="square_btn">Read More</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col" ontouchstart="this.classList.toggle('hover');">
+              <div class="container">
+                  <div class="front" style="background-image: url(landing-page-pictures/movierec.PNG)">
+                      <div class="inner">
+                          <p>SVD Movie Recommendation</p>
+                      </div>
+                  </div>
+                  <div class="back">
+                      <div class="inner">
+                          <p>Maximizing precision for movie recommendations using singular value decomposition.</p>
+                          <a href="Movie-Recommender.html" class="square_btn">Read More</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <p class="project-description main-page">Website Built and Designed by Will</p>
+    </div>
+  </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js" integrity="sha512-0xrMWUXzEAc+VY7k48pWd5YT6ig03p4KARKxs4Bqxb9atrcn2fV41fWs+YXTKb8lD2sbPAmZMjKENiyzM/Gagw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" integrity="sha512-DkPsH9LzNzZaZjCszwKrooKwgjArJDiEjA5tTgr3YX4E6TYv93ICS8T41yFHJnnSmGpnf0Mvb5NhScYbwvhn2w==" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+
+  </body>
+</html>
